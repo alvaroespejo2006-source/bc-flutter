@@ -25,13 +25,24 @@ class Item with Identifiable, Timestamped {
   // TODO: Agrega aquí las propiedades específicas de tu dominio.
   // Ejemplo (Biblioteca): final String author; final String isbn;
   // Ejemplo (Farmacia): final double price; final int stock;
+  //
+  // --- Implementación del aprendiz (Álvaro Enrique Espejo Barreto) ---
+  // Dominio asignado: Vivero de plantas.
+  // `Item` representa una planta (plant) del catálogo del vivero.
+  final String category; // categoría de la planta, ej. "Suculenta", "Árbol frutal"
+  final String supplier; // proveedor que abastece la planta
+  final double price; // precio de venta al público
 
   const Item({
     required this.id,
     required this.name,
     required this.createdAt,
+    required this.category,
+    required this.supplier,
+    required this.price,
   });
 
   @override
-  String toString() => '#$shortId $name';
+  String toString() =>
+      '#$shortId $name ($category) — Proveedor: $supplier | \$${price.toStringAsFixed(0)}';
 }

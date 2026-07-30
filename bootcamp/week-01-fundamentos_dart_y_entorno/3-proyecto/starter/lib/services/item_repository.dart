@@ -15,9 +15,42 @@ class ItemRepository {
   Future<List<Item>> fetchItems() {
     return Future.delayed(const Duration(milliseconds: 300), () {
       // TODO: Reemplaza esta lista de ejemplo por elementos de tu dominio.
+      //
+      // --- Implementación del aprendiz (Álvaro Enrique Espejo Barreto) ---
+      // Dominio: Vivero de plantas -> catálogo de plantas (plants).
       return <Item>[
-        Item(id: 'item_001', name: 'Elemento de ejemplo 1', createdAt: DateTime.now()),
-        Item(id: 'item_002', name: 'Elemento de ejemplo 2', createdAt: DateTime.now()),
+        Item(
+          id: 'plant_001',
+          name: 'Suculenta Echeveria',
+          createdAt: DateTime(2024, 1, 15),
+          category: 'Suculenta',
+          supplier: 'Vivero El Rosal',
+          price: 12000,
+        ),
+        Item(
+          id: 'plant_002',
+          name: 'Ficus Lyrata',
+          createdAt: DateTime(2024, 2, 20),
+          category: 'Árbol de interior',
+          supplier: 'Plantas Verdes S.A.S.',
+          price: 85000,
+        ),
+        Item(
+          id: 'plant_003',
+          name: 'Rosal Rojo',
+          createdAt: DateTime(2024, 4, 3),
+          category: 'Arbusto ornamental',
+          supplier: 'Vivero El Rosal',
+          price: 25000,
+        ),
+        Item(
+          id: 'plant_004',
+          name: 'Orégano',
+          createdAt: DateTime(2024, 5, 30),
+          category: 'Hierba aromática',
+          supplier: 'Agroinsumos del Valle',
+          price: 8000,
+        ),
       ];
     });
   }
@@ -29,6 +62,12 @@ class ItemRepository {
   Future<Item?> findById(String id) async {
     // TODO: usa fetchItems(), luego busca el elemento con ese id.
     // Pista: List.where + firstOrNull, o un for con early return.
-    throw UnimplementedError('findById no implementado');
+    //
+    // --- Implementación del aprendiz (Álvaro Enrique Espejo Barreto) ---
+    final items = await fetchItems();
+    for (final item in items) {
+      if (item.id == id) return item;
+    }
+    return null;
   }
 }
