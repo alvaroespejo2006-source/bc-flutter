@@ -17,14 +17,31 @@ Future<void> main() async {
 
   // TODO: usa `await` para obtener la lista de items desde `repository.fetchItems()`
   // y guárdala en una variable `items`.
+  // --- Implementación del aprendiz (Álvaro Enrique Espejo Barreto) ---
+  final items = await repository.fetchItems();
 
   // TODO: si `items` está vacía, imprime un mensaje indicándolo (usa null
   // safety / .isEmpty, no asumas que siempre habrá datos).
+  if (items.isEmpty) {
+    print('No hay plantas registradas en el vivero todavía.');
+    return;
+  }
 
   // TODO: recorre `items` e imprime cada uno (usa el `toString()` ya
   // definido en Item, o formatea el output como prefieras).
+  print('\n🌱 Catálogo del Vivero de Plantas:');
+  for (final item in items) {
+    print('- $item');
+  }
 
   // TODO: usa `repository.findById(...)` con un id que SÍ exista y otro que
   // NO exista, e imprime el resultado en ambos casos (debe manejar el caso
   // null sin lanzar excepción).
+  print('\n🔎 Buscando planta existente (id: plant_002):');
+  final existing = await repository.findById('plant_002');
+  print(existing != null ? 'Encontrada -> $existing' : 'No encontrada.');
+
+  print('\n🔎 Buscando planta inexistente (id: plant_999):');
+  final missing = await repository.findById('plant_999');
+  print(missing != null ? 'Encontrada -> $missing' : 'No encontrada.');
 }
