@@ -52,48 +52,30 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final filtered = _allItems
+        .where((item) => item.toLowerCase().contains(_query.toLowerCase()))
+        .toList();
+
     return Scaffold(
       appBar: AppBar(title: const Text('Ejercicio 03')),
-      body: const Center(child: Placeholder()), // se reemplaza en el PASO 1
+      body: Column(
+        children: [
+          TextField(
+            controller: _searchController,
+            decoration: const InputDecoration(labelText: 'Buscar', prefixIcon: Icon(Icons.search)),
+            onChanged: (value) => setState(() => _query = value),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: filtered.length,
+              itemBuilder: (context, index) {
+                final item = filtered[index];
+                return ListTile(title: Text(item));
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
-
-// ============================================
-// PASO 1: ListView.builder con datos estáticos
-// ============================================
-// Descomenta las siguientes líneas y reemplaza el `body:` de arriba
-// (dentro de _HomeScreenState.build) por este ListView.builder usando
-// `_allItems`:
-//
-// ListView.builder(
-//   itemCount: _allItems.length,
-//   itemBuilder: (context, index) {
-//     final item = _allItems[index];
-//     return ListTile(title: Text(item));
-//   },
-// )
-
-// ============================================
-// PASO 2: TextField para capturar la búsqueda
-// ============================================
-// Descomenta las siguientes líneas y envuelve el body en una Column con
-// este TextField arriba y el ListView.builder del PASO 1 envuelto en
-// Expanded debajo:
-//
-// TextField(
-//   controller: _searchController,
-//   decoration: const InputDecoration(labelText: 'Buscar', prefixIcon: Icon(Icons.search)),
-//   onChanged: (value) => setState(() => _query = value),
-// ),
-
-// ============================================
-// PASO 3: Filtrar la lista según _query
-// ============================================
-// Descomenta las siguientes líneas dentro de build(), antes del `return`, y
-// usa `filtered` en vez de `_allItems` como itemCount/fuente del
-// ListView.builder:
-//
-// final filtered = _allItems
-//     .where((item) => item.toLowerCase().contains(_query.toLowerCase()))
-//     .toList();
