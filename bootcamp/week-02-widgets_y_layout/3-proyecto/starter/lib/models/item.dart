@@ -14,13 +14,19 @@ class Item {
   final String name;
   final String description;
 
-  // TODO: Agrega aquí las propiedades específicas de tu dominio.
-  // Ejemplo (Biblioteca): final String author;
-  // Ejemplo (Farmacia): final double price;
+  // --- Implementación del aprendiz (Álvaro Enrique Espejo Barreto) ---
+  // Dominio asignado: Vivero de plantas.
+  // `Item` representa una planta del catálogo del vivero.
+  final String category; // categoría de la planta, ej. "Suculenta", "Árbol de interior"
+  final String supplier; // proveedor que abastece la planta
+  final double price; // precio de venta al público
 
   const Item({
     required this.id,
     required this.name,
     required this.description,
+    required this.category,
+    required this.supplier,
+    required this.price,
   });
 }
